@@ -1,0 +1,620 @@
+﻿@model StudentManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Delete Student";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        background: var(--danger-gradient);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.1)" points="1000,0 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.95);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    .btn-danger-gradient {
+        background: var(--danger-gradient);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        font-size: 1rem;
+    }
+
+        .btn-danger-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .btn-danger-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn-danger-gradient:hover::before {
+            left: 100%;
+        }
+
+    .btn-secondary-gradient {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-secondary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+
+    @@keyframes shake {
+        0%, 100%
+
+    {
+        transform: translateX(0) translateY(-2px);
+    }
+
+    25% {
+        transform: translateX(-2px) translateY(-2px);
+    }
+
+    75% {
+        transform: translateX(2px) translateY(-2px);
+    }
+
+    }
+
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .fade-in-scale {
+        animation: fadeInScale 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    @@keyframes fadeInScale {
+        from
+
+    {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    }
+
+    .warning-icon {
+        font-size: 5rem;
+        color: #dc3545;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0%, 100%
+
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    }
+
+    .student-info-card {
+        background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+        border: 2px solid rgba(220, 53, 69, 0.2);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .student-info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--danger-gradient);
+        }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        font-weight: 600;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+    }
+
+        .detail-label i {
+            margin-right: 8px;
+            color: #dc3545;
+        }
+
+    .detail-value {
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
+
+    .grade-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #dc3545;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .danger-alerts {
+        background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+        border: 1px solid #f5c6cb;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .countdown {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #dc3545;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .deletion-effects {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .confirmation-checkbox {
+        transform: scale(1.2);
+        margin-right: 10px;
+    }
+
+    .confirmation-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+</style>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="text-center">
+        <div class="spinner mb-3"></div>
+        <p class="text-white fs-5">Deleting Student...</p>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div class="page-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in-up">
+            <i class="fas fa-exclamation-triangle me-3"></i>Delete Student
+        </h1>
+        <p class="lead fade-in-up" style="animation-delay: 0.2s;">This action cannot be undone</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <!-- Warning Icon and Message -->
+            <div class="text-center mb-4 fade-in-scale">
+                <div class="warning-icon">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+                <h3 class="text-danger mb-3">Are you sure you want to delete this student?</h3>
+                <div class="countdown" id="countdown">
+                    Think carefully... <span id="timer">10</span>
+                </div>
+            </div>
+
+            <!-- Student Information Card -->
+            <div class="student-info-card fade-in-up" style="animation-delay: 0.2s;">
+                <h5 class="mb-4 text-danger">
+                    <i class="fas fa-user me-2"></i>Student to be Deleted
+                </h5>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <i class="fas fa-user"></i>Full Name
+                    </div>
+                    <div class="detail-value">@Model.Name</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <i class="fas fa-birthday-cake"></i>Age
+                    </div>
+                    <div class="detail-value">@Model.Age years</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <i class="fas fa-book"></i>Course
+                    </div>
+                    <div class="detail-value">@Model.Course</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">
+                        <i class="fas fa-chart-bar"></i>Marks
+                    </div>
+                    <div class="detail-value">
+                        @Model.Marks%
+                        @{
+                            string gradeClass = "";
+                            string grade = "";
+                            if (Model.Marks >= 90) { grade = "A+"; gradeClass = "bg-success"; }
+                            else if (Model.Marks >= 80) { grade = "A"; gradeClass = "bg-info"; }
+                            else if (Model.Marks >= 70) { grade = "B+"; gradeClass = "bg-warning"; }
+                            else if (Model.Marks >= 60) { grade = "B"; gradeClass = "bg-primary"; }
+                            else if (Model.Marks >= 50) { grade = "C"; gradeClass = "bg-secondary"; }
+                            else { grade = "F"; gradeClass = "bg-danger"; }
+                        }
+                        <span class="grade-badge @gradeClass ms-2">@grade</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger Alerts -->
+            <div class="danger-alerts fade-in-up" style="animation-delay: 0.3s;">
+                <h6 class="text-danger mb-3">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Warning: Permanent Deletion
+                </h6>
+                <div class="deletion-effects">
+                    <strong>What will happen when you delete this student:</strong>
+                    <ul class="mt-2 mb-0">
+                        <li>All student data will be permanently removed</li>
+                        <li>Academic records and grades will be lost</li>
+                        <li>This action cannot be reversed or undone</li>
+                        <li>Student ID will be retired and cannot be reused</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-danger mt-3 mb-0">
+                    <i class="fas fa-shield-alt me-2"></i>
+                    <strong>Data Protection Notice:</strong> By proceeding, you confirm that you have the authority to delete this student record and understand the permanent nature of this action.
+                </div>
+            </div>
+
+            <!-- Confirmation Form -->
+            <div class="card fade-in-up" style="animation-delay: 0.4s;">
+                <div class="card-header text-center bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-check me-2"></i>Confirmation Required
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Delete" id="deleteForm">
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Confirmation Checkboxes -->
+                        <div class="mb-4">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input confirmation-checkbox" type="checkbox" id="confirm1" required>
+                                <label class="form-check-label confirmation-text" for="confirm1">
+                                    I understand this action cannot be undone
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input confirmation-checkbox" type="checkbox" id="confirm2" required>
+                                <label class="form-check-label confirmation-text" for="confirm2">
+                                    I have the authority to delete this student record
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input confirmation-checkbox" type="checkbox" id="confirm3" required>
+                                <label class="form-check-label confirmation-text" for="confirm3">
+                                    I acknowledge that all data will be permanently lost
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Final Confirmation Input -->
+                        <div class="mb-4">
+                            <label for="confirmText" class="form-label">
+                                <strong>Type "DELETE @Model.Name" to confirm:</strong>
+                            </label>
+                            <input type="text" class="form-control" id="confirmText" placeholder="Type exactly: DELETE @Model.Name" required>
+                            <div class="invalid-feedback">
+                                Please type the exact confirmation text.
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger-gradient me-3" id="deleteBtn" disabled>
+                                <i class="fas fa-trash-alt me-2"></i>
+                                <span id="deleteButtonText">Confirm Delete</span>
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary-gradient">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel & Go Back
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Font Awesome and Bootstrap if not already included -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('deleteForm');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const deleteButtonText = document.getElementById('deleteButtonText');
+        const confirmText = document.getElementById('confirmText');
+        const checkboxes = document.querySelectorAll('.confirmation-checkbox');
+        const timer = document.getElementById('timer');
+        const expectedText = 'DELETE @Model.Name';
+
+        let countdown = 10;
+        let countdownInterval;
+        let formEnabled = false;
+
+        // Start countdown
+        countdownInterval = setInterval(() => {
+            countdown--;
+            timer.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = '<span class="text-success">You may now proceed</span>';
+                formEnabled = true;
+                validateForm();
+            }
+        }, 1000);
+
+        // Validate form state
+        function validateForm() {
+            if (!formEnabled) {
+                deleteBtn.disabled = true;
+                return;
+            }
+
+            const allCheckboxesChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const textMatches = confirmText.value === expectedText;
+
+            if (allCheckboxesChecked && textMatches) {
+                deleteBtn.disabled = false;
+                deleteBtn.classList.add('btn-danger-gradient');
+                deleteButtonText.textContent = 'DELETE STUDENT';
+            } else {
+                deleteBtn.disabled = true;
+                deleteBtn.classList.remove('btn-danger-gradient');
+                deleteButtonText.textContent = 'Complete all confirmations';
+            }
+        }
+
+        // Add event listeners
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', validateForm);
+        });
+
+        confirmText.addEventListener('input', function() {
+            validateForm();
+
+            // Real-time validation feedback
+            if (this.value === expectedText) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            } else if (this.value.length > 0) {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-valid', 'is-invalid');
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            if (!formEnabled) {
+                e.preventDefault();
+                alert('Please wait for the countdown to complete.');
+                return;
+            }
+
+            const allCheckboxesChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const textMatches = confirmText.value === expectedText;
+
+            if (!allCheckboxesChecked || !textMatches) {
+                e.preventDefault();
+                alert('Please complete all confirmation requirements.');
+                return;
+            }
+
+            // Double confirmation
+            const finalConfirm = confirm('FINAL WARNING: This will permanently delete the student record. Are you absolutely sure?');
+            if (!finalConfirm) {
+                e.preventDefault();
+                return;
+            }
+
+            // Show loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Deleting...';
+            deleteBtn.disabled = true;
+        });
+
+        // Add click handler to back links
+        const backLinks = document.querySelectorAll('a[asp-action]');
+        backLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (this.getAttribute('asp-action') !== 'Delete') {
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+                    if (loadingOverlay) {
+                        loadingOverlay.style.display = 'flex';
+                    }
+                }
+            });
+        });
+
+        // Hide loading on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                }
+            }, 500);
+        });
+
+        // Add warning when user tries to leave page
+        let formModified = false;
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => formModified = true);
+        });
+        confirmText.addEventListener('input', () => formModified = true);
+
+        window.addEventListener('beforeunload', function(e) {
+            if (formModified && formEnabled) {
+                e.preventDefault();
+                e.returnValue = 'You have started the deletion process. Are you sure you want to leave?';
+            }
+        });
+    });
+</script>

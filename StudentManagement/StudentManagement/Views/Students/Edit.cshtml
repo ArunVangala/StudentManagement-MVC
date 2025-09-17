@@ -1,0 +1,574 @@
+﻿@model StudentManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        background: var(--warning-gradient);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.1)" points="1000,0 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.95);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    .form-control {
+        border-radius: 25px;
+        border: 2px solid #e9ecef;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+        background: rgba(255,255,255,0.9);
+        font-size: 1rem;
+    }
+
+        .form-control:focus {
+            border-color: #f093fb;
+            box-shadow: 0 0 0 0.2rem rgba(240, 147, 251, 0.25);
+            transform: translateY(-2px);
+            background: white;
+        }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+        .form-label i {
+            margin-right: 8px;
+            color: #f093fb;
+        }
+
+    .btn-gradient {
+        background: var(--warning-gradient);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        font-size: 1rem;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+    .btn-secondary-gradient {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-secondary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+        color: #dc3545;
+        font-weight: 500;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #f093fb;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .student-info-card {
+        background: var(--info-gradient);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .changes-indicator {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 20px;
+        height: 20px;
+        background: #28a745;
+        border-radius: 50%;
+        border: 3px solid white;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+    }
+
+        .changes-indicator.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="text-center">
+        <div class="spinner mb-3"></div>
+        <p class="text-white fs-5">Updating Student...</p>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div class="page-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in-up">Edit Student</h1>
+        <p class="lead fade-in-up" style="animation-delay: 0.2s;">Update student information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <!-- Student Info Card -->
+            <div class="student-info-card fade-in-up">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center">
+                        <i class="fas fa-user-edit fa-3x mb-2"></i>
+                    </div>
+                    <div class="col-md-9">
+                        <h5 class="mb-1">Editing: @Model.Name</h5>
+                        <p class="mb-1">Course: @Model.Course</p>
+                        <p class="mb-0">
+                            Current Grade:
+                            @{
+                                string currentGrade = "";
+                                if (Model.Marks >= 90) currentGrade = "A+";
+                                else if (Model.Marks >= 80) currentGrade = "A";
+                                else if (Model.Marks >= 70) currentGrade = "B+";
+                                else if (Model.Marks >= 60) currentGrade = "B";
+                                else if (Model.Marks >= 50) currentGrade = "C";
+                                else currentGrade = "F";
+                            }
+                            <strong>@currentGrade</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in-up" style="animation-delay: 0.3s;">
+                <div class="card-header text-center" style="background: var(--warning-gradient); color: white; border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Update Information
+                    </h4>
+                    <small id="changesSummary" class="d-block mt-1 opacity-75">Make your changes below</small>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Edit" id="studentForm" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Name Field -->
+                        <div class="form-group">
+                            <label asp-for="Name" class="form-label">
+                                <i class="fas fa-user"></i>Full Name
+                            </label>
+                            <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter student's full name" data-original="@Model.Name" />
+                            <span asp-validation-for="Name" class="invalid-feedback"></span>
+                            <div class="changes-indicator" id="nameIndicator"></div>
+                        </div>
+
+                        <!-- Age Field -->
+                        <div class="form-group">
+                            <label asp-for="Age" class="form-label">
+                                <i class="fas fa-birthday-cake"></i>Age
+                            </label>
+                            <input asp-for="Age" class="form-control form-control-lg" type="number" min="16" max="100" placeholder="Enter age (16-100)" data-original="@Model.Age" />
+                            <span asp-validation-for="Age" class="invalid-feedback"></span>
+                            <div class="changes-indicator" id="ageIndicator"></div>
+                        </div>
+
+                        <!-- Course Field -->
+                        <div class="form-group">
+                            <label asp-for="Course" class="form-label">
+                                <i class="fas fa-book"></i>Course
+                            </label>
+                            <select asp-for="Course" class="form-control form-control-lg" data-original="@Model.Course">
+                                <option value="">Select Course</option>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="Electronics Engineering">Electronics Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Business Administration">Business Administration</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                            </select>
+                            <span asp-validation-for="Course" class="invalid-feedback"></span>
+                            <div class="changes-indicator" id="courseIndicator"></div>
+                        </div>
+
+                        <!-- Marks Field -->
+                        <div class="form-group">
+                            <label asp-for="Marks" class="form-label">
+                                <i class="fas fa-chart-bar"></i>Marks (Percentage)
+                            </label>
+                            <input asp-for="Marks" class="form-control form-control-lg" type="number" min="0" max="100" placeholder="Enter marks (0-100)" data-original="@Model.Marks" />
+                            <span asp-validation-for="Marks" class="invalid-feedback"></span>
+                            <div class="changes-indicator" id="marksIndicator"></div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle"></i>
+                                    Current: @Model.Marks% (@currentGrade) |
+                                    New Grade: <span id="newGradePreview">@currentGrade</span>
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-gradient me-3" id="saveBtn">
+                                <i class="fas fa-save me-2"></i>Update Student
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary-gradient">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('studentForm');
+            const inputs = document.querySelectorAll('.form-control');
+            const saveBtn = document.getElementById('saveBtn');
+            const changesSummary = document.getElementById('changesSummary');
+            let hasChanges = false;
+            let changesCount = 0;
+
+            // Track original values
+            const originalValues = {};
+            inputs.forEach(input => {
+                originalValues[input.name] = input.getAttribute('data-original') || input.value;
+            });
+
+            // Real-time validation and change tracking
+            inputs.forEach((input) => {
+                input.addEventListener('input', function() {
+                    validateField(this);
+                    trackChanges(this);
+                    if (this.name === 'Marks') {
+                        updateGradePreview(this.value);
+                    }
+                });
+
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+
+            function validateField(field) {
+                const fieldName = field.name;
+                let isValid = true;
+                let errorMessage = '';
+
+                field.classList.remove('is-invalid', 'is-valid');
+
+                switch(fieldName) {
+                    case 'Name':
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            errorMessage = 'Name is required.';
+                        } else if (field.value.trim().length < 2) {
+                            isValid = false;
+                            errorMessage = 'Name must be at least 2 characters long.';
+                        }
+                        break;
+
+                    case 'Age':
+                        const age = parseInt(field.value);
+                        if (!field.value) {
+                            isValid = false;
+                            errorMessage = 'Age is required.';
+                        } else if (age < 16 || age > 100) {
+                            isValid = false;
+                            errorMessage = 'Age must be between 16 and 100.';
+                        }
+                        break;
+
+                    case 'Course':
+                        if (!field.value) {
+                            isValid = false;
+                            errorMessage = 'Please select a course.';
+                        }
+                        break;
+
+                    case 'Marks':
+                        const marks = parseInt(field.value);
+                        if (field.value === '') {
+                            isValid = false;
+                            errorMessage = 'Marks is required.';
+                        } else if (marks < 0 || marks > 100) {
+                            isValid = false;
+                            errorMessage = 'Marks must be between 0 and 100.';
+                        }
+                        break;
+                }
+
+                if (isValid && field.value) {
+                    field.classList.add('is-valid');
+                } else if (!isValid) {
+                    field.classList.add('is-invalid');
+                }
+
+                const feedback = field.parentElement.querySelector('.invalid-feedback');
+                if (feedback) {
+                    feedback.textContent = errorMessage;
+                }
+
+                return isValid;
+            }
+
+            function trackChanges(field) {
+                const originalValue = originalValues[field.name];
+                const currentValue = field.value;
+                const indicator = document.getElementById(field.name.toLowerCase() + 'Indicator');
+
+                if (currentValue !== originalValue) {
+                    if (indicator) {
+                        indicator.classList.add('show');
+                    }
+                    field.setAttribute('data-changed', 'true');
+                } else {
+                    if (indicator) {
+                        indicator.classList.remove('show');
+                    }
+                    field.removeAttribute('data-changed');
+                }
+
+                // Update changes count
+                changesCount = document.querySelectorAll('[data-changed="true"]').length;
+                hasChanges = changesCount > 0;
+
+                // Update UI based on changes
+                if (hasChanges) {
+                    changesSummary.textContent = `${changesCount} change${changesCount > 1 ? 's' : ''} detected`;
+                    saveBtn.innerHTML = '<i class="fas fa-save me-2"></i>Save Changes';
+                    saveBtn.classList.remove('btn-secondary');
+                    saveBtn.classList.add('btn-gradient');
+                } else {
+                    changesSummary.textContent = 'No changes made';
+                    saveBtn.innerHTML = '<i class="fas fa-save me-2"></i>Update Student';
+                }
+            }
+
+            function updateGradePreview(marks) {
+                const gradePreview = document.getElementById('newGradePreview');
+                let grade = '';
+
+                if (marks >= 90) grade = 'A+';
+                else if (marks >= 80) grade = 'A';
+                else if (marks >= 70) grade = 'B+';
+                else if (marks >= 60) grade = 'B';
+                else if (marks >= 50) grade = 'C';
+                else grade = 'F';
+
+                gradePreview.textContent = grade;
+                gradePreview.style.color = marks >= 70 ? '#28a745' : marks >= 50 ? '#ffc107' : '#dc3545';
+            }
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (!isFormValid) {
+                    e.preventDefault();
+                    form.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        form.style.animation = '';
+                    }, 500);
+                    return;
+                }
+
+                if (!hasChanges) {
+                    e.preventDefault();
+                    alert('No changes were made to update.');
+                    return;
+                }
+
+                document.getElementById('loadingOverlay').style.display = 'flex';
+            });
+
+            // Shake animation
+            const style = document.createElement('style');
+            style.textContent = `
+               @@keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Hide loading on page load
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    const loadingOverlay = document.getElementById('loadingOverlay');
+                    if (loadingOverlay) {
+                        loadingOverlay.style.display = 'none';
+                    }
+                }, 500);
+            });
+
+            // Initialize grade preview
+            const marksInput = document.querySelector('input[name="Marks"]');
+            if (marksInput && marksInput.value) {
+                updateGradePreview(marksInput.value);
+            }
+        });
+    </script>
+}

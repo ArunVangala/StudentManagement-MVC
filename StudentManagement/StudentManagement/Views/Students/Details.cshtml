@@ -1,0 +1,730 @@
+﻿@model StudentManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        background: var(--info-gradient);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.1)" points="1000,0 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.95);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    .btn-gradient {
+        background: var(--warning-gradient);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+    .btn-secondary-gradient {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        border-radius: 25px;
+        padding: 12px 30px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-secondary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .fade-in-left {
+        animation: fadeInLeft 0.6s ease-out;
+    }
+
+    .fade-in-right {
+        animation: fadeInRight 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    @@keyframes fadeInLeft {
+        from
+
+    {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    }
+
+   @@keyframes fadeInRight {
+        from
+
+    {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    }
+
+    .detail-item {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .detail-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .detail-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--info-gradient);
+        }
+
+    .detail-label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+        .detail-label i {
+            margin-right: 8px;
+            color: #4facfe;
+            font-size: 1.1rem;
+        }
+
+    .detail-value {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 0;
+    }
+
+    .grade-badge {
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-size: 2rem;
+        font-weight: 800;
+        text-align: center;
+        color: white;
+        min-width: 120px;
+        letter-spacing: 2px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .grade-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+    @@keyframes shimmer {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .student-avatar {
+        width: 120px;
+        height: 120px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        margin: 0 auto 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .student-avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: rotate 4s linear infinite;
+        }
+
+    @@keyframes rotate {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .performance-chart {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .progress-ring {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 20px;
+        position: relative;
+    }
+
+        .progress-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 10;
+        }
+
+        .progress-ring .bg {
+            stroke: #e9ecef;
+        }
+
+        .progress-ring .progress {
+            stroke-linecap: round;
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            transition: stroke-dashoffset 2s ease-in-out;
+        }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #4facfe;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+</style>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="text-center">
+        <div class="spinner mb-3"></div>
+        <p class="text-white fs-5">Loading Details...</p>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div class="page-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in-up">Student Details</h1>
+        <p class="lead fade-in-up" style="animation-delay: 0.2s;">Complete information about @Model.Name</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Student Profile Card -->
+        <div class="col-lg-4">
+            <div class="card fade-in-left">
+                <div class="card-body text-center p-4">
+                    <div class="student-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="mb-1">@Model.Name</h3>
+                    <p class="text-muted mb-3">@Model.Course</p>
+
+                    @{
+                        string gradeClass = "";
+                        string grade = "";
+                        if (Model.Marks >= 90) { grade = "A+"; gradeClass = "bg-success"; }
+                        else if (Model.Marks >= 80) { grade = "A"; gradeClass = "bg-info"; }
+                        else if (Model.Marks >= 70) { grade = "B+"; gradeClass = "bg-warning"; }
+                        else if (Model.Marks >= 60) { grade = "B"; gradeClass = "bg-primary"; }
+                        else if (Model.Marks >= 50) { grade = "C"; gradeClass = "bg-secondary"; }
+                        else { grade = "F"; gradeClass = "bg-danger"; }
+
+                        string gradientClass = "";
+                        if (Model.Marks >= 90) gradientClass = "background: var(--success-gradient);";
+                        else if (Model.Marks >= 80) gradientClass = "background: var(--info-gradient);";
+                        else if (Model.Marks >= 70) gradientClass = "background: var(--warning-gradient);";
+                        else if (Model.Marks >= 60) gradientClass = "background: var(--primary-gradient);";
+                        else if (Model.Marks >= 50) gradientClass = "background: linear-gradient(135deg, #6c757d 0%, #495057 100%);";
+                        else gradientClass = "background: var(--danger-gradient);";
+                    }
+
+                    <div class="grade-badge mb-3" style="@gradientClass">
+                        @grade
+                    </div>
+
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="border-end">
+                                <h4 class="mb-0 text-primary">@Model.Age</h4>
+                                <small class="text-muted">Years Old</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="mb-0 text-success">@Model.Marks%</h4>
+                            <small class="text-muted">Score</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Chart -->
+            <div class="performance-chart fade-in-left mt-4" style="animation-delay: 0.2s;">
+                <h5 class="mb-4"><i class="fas fa-chart-pie me-2"></i>Performance Overview</h5>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="100" cy="100" r="70"></circle>
+                        <circle class="progress" cx="100" cy="100" r="70"
+                                style="@gradientClass stroke-dashoffset: @(440 - (Model.Marks * 440 / 100));"></circle>
+                    </svg>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <div class="h2 mb-0">@Model.Marks%</div>
+                        <small class="text-muted">Overall Score</small>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <small class="text-muted">
+                        Performance Level:
+                        @if (Model.Marks >= 90)
+                        {
+                            <span class="text-success fw-bold">Excellent</span>
+                        }
+                        else if (Model.Marks >= 80)
+                        {
+                            <span class="text-info fw-bold">Very Good</span>
+                        }
+                        else if (Model.Marks >= 70)
+                        {
+                            <span class="text-warning fw-bold">Good</span>
+                        }
+                        else if (Model.Marks >= 60)
+                        {
+                            <span class="text-primary fw-bold">Satisfactory</span>
+                        }
+                        else if (Model.Marks >= 50)
+                        {
+                            <span class="text-secondary fw-bold">Average</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger fw-bold">Needs Improvement</span>
+                        }
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Cards -->
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="detail-item fade-in-up">
+                        <div class="detail-label">
+                            <i class="fas fa-user"></i>Full Name
+                        </div>
+                        <div class="detail-value">@Model.Name</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item fade-in-up" style="animation-delay: 0.1s;">
+                        <div class="detail-label">
+                            <i class="fas fa-birthday-cake"></i>Age
+                        </div>
+                        <div class="detail-value">@Model.Age Years</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="detail-label">
+                            <i class="fas fa-book"></i>Course
+                        </div>
+                        <div class="detail-value">@Model.Course</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-item fade-in-up" style="animation-delay: 0.3s;">
+                        <div class="detail-label">
+                            <i class="fas fa-chart-bar"></i>Marks
+                        </div>
+                        <div class="detail-value">@Model.Marks%</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="detail-item fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="detail-label">
+                            <i class="fas fa-medal"></i>Grade & Status
+                        </div>
+                        <div class="detail-value d-flex align-items-center justify-content-between">
+                            <span>Grade: <strong>@grade</strong></span>
+                            <span class="badge @gradeClass fs-6 px-3 py-2">
+                                @if (Model.Marks >= 50)
+                                {
+                                    <i class="fas fa-check-circle me-1">P</i>
+                                                                }
+                                else
+                                {
+                                    <i class="fas fa-times-circle me-1">F</i>
+                                    
+                                                                }
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="card fade-in-up mt-4" style="animation-delay: 0.5s;">
+                <div class="card-header" style="background: var(--info-gradient); color: white;">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Additional Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Student ID:</strong> #@Model.Id.ToString("D4")</p>
+                            <p><strong>Academic Year:</strong> @DateTime.Now.Year</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Grade Point:</strong>
+                                @{
+                                    decimal gpa = 0;
+                                    if (Model.Marks >= 90) gpa = 4.0m;
+                                    else if (Model.Marks >= 80) gpa = 3.5m;
+                                    else if (Model.Marks >= 70) gpa = 3.0m;
+                                    else if (Model.Marks >= 60) gpa = 2.5m;
+                                    else if (Model.Marks >= 50) gpa = 2.0m;
+                                    else gpa = 0.0m;
+                                }
+                                @gpa.ToString("F1")/4.0
+                            </p>
+                            <p>
+                                <strong>Status:</strong>
+                                @if (Model.Marks >= 50)
+                                {
+                                    <span class="text-success"><i class="fas fa-check-circle"></i> Active</span>
+                                }
+                                else
+                                {
+                                    <span class="text-warning"><i class="fas fa-exclamation-triangle"></i> Under Review</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-3">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        <strong>Performance Insight:</strong>
+                        @if (Model.Marks >= 90)
+                        {
+                            <text>Outstanding performance! Keep up the excellent work.</text>
+                        }
+                        else if (Model.Marks >= 80)
+                        {
+                            <text>Very good performance with room for improvement to reach excellence.</text>
+                        }
+                        else if (Model.Marks >= 70)
+                        {
+                            <text>Good performance. Focus on weak areas to improve further.</text>
+                        }
+                        else if (Model.Marks >= 60)
+                        {
+                            <text>Satisfactory performance. Additional study and practice recommended.</text>
+                        }
+                        else if (Model.Marks >= 50)
+                        {
+                            <text>Average performance. Significant improvement needed in multiple areas.</text>
+                        }
+                        else
+                        {
+                            <text>Performance needs immediate attention. Consider additional support and tutoring.</text>
+                        }
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons fade-in-up" style="animation-delay: 0.6s;">
+                        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-gradient">
+                            <i class="fas fa-edit me-2"></i>Edit Student
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary-gradient">
+                            <i class="fas fa-arrow-left me-2"></i>Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Include Font Awesome and Bootstrap if not already included -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add loading spinner for action links, but exclude asp-action links as they need server-side processing
+        const regularLinks = document.querySelectorAll('a:not([asp-action])');
+        regularLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                showLoading();
+            });
+        });
+
+        // For asp-action links, let them work naturally without JavaScript intervention
+        const aspActionLinks = document.querySelectorAll('a[asp-action]');
+        aspActionLinks.forEach(link => {
+            // Remove any existing event listeners that might interfere
+            link.style.pointerEvents = 'auto';
+
+            // Optional: Add loading only on click, but don't prevent default
+            link.addEventListener('click', function() {
+                // Small delay to show loading after navigation starts
+                setTimeout(() => {
+                    showLoading();
+                }, 50);
+            });
+        });
+
+        // Animate progress ring
+        setTimeout(() => {
+            const progressCircle = document.querySelector('.progress-ring .progress');
+            if (progressCircle) {
+                const marksElement = progressCircle.getAttribute('style');
+                // Progress ring animation will work with existing CSS
+            }
+        }, 500);
+
+        // Add hover effects to detail items
+        const detailItems = document.querySelectorAll('.detail-item');
+        detailItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+
+        // Ensure buttons are clickable
+        const editButton = document.querySelector('a[asp-action="Edit"]');
+        const backButton = document.querySelector('a[asp-action="Index"]');
+
+        if (editButton) {
+            editButton.style.cursor = 'pointer';
+            editButton.style.pointerEvents = 'auto';
+        }
+
+        if (backButton) {
+            backButton.style.cursor = 'pointer';
+            backButton.style.pointerEvents = 'auto';
+        }
+    });
+
+    function showLoading() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'flex';
+        }
+    }
+
+    function hideLoading() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+    }
+
+    // Hide loading after page load
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            hideLoading();
+        }, 500);
+    });
+
+    // Handle browser back/forward buttons
+    window.addEventListener('pageshow', function(event) {
+        hideLoading();
+    });
+
+    // Handle browser navigation
+    window.addEventListener('beforeunload', function() {
+        showLoading();
+    });
+</script>

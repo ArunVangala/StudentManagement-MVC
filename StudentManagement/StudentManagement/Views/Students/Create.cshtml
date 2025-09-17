@@ -1,0 +1,538 @@
+﻿@model StudentManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Add New Student";
+}
+
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        --warning-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --danger-gradient: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+        --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-header {
+        background: var(--primary-gradient);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.1)" points="1000,0 1000,100 0,100"/></svg>');
+            background-size: cover;
+        }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.95);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    .form-control {
+        border-radius: 25px;
+        border: 2px solid #e9ecef;
+        padding: 15px 20px;
+        transition: all 0.3s ease;
+        background: rgba(255,255,255,0.9);
+        font-size: 1rem;
+    }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            transform: translateY(-2px);
+            background: white;
+        }
+
+    .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+        .form-label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+    .btn-gradient {
+        background: var(--success-gradient);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        font-size: 1rem;
+    }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+    .btn-secondary-gradient {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        border-radius: 25px;
+        padding: 15px 40px;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .btn-secondary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+
+    .fade-in-up {
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .form-floating {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+        .form-floating .form-control {
+            height: calc(3.5rem + 2px);
+            padding: 1rem 0.75rem;
+        }
+
+        .form-floating > label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding: 1rem 0.75rem;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+        }
+
+    .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 0.875em;
+        color: #dc3545;
+        font-weight: 500;
+    }
+
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .progress-bar {
+        height: 4px;
+        background: var(--primary-gradient);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    .form-step {
+        opacity: 0.5;
+        transform: scale(0.95);
+        transition: all 0.3s ease;
+    }
+
+        .form-step.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+</style>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="text-center">
+        <div class="spinner mb-3"></div>
+        <p class="text-white fs-5">Saving Student...</p>
+    </div>
+</div>
+
+<!-- Page Header -->
+<div class="page-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold fade-in-up">Add New Student</h1>
+        <p class="lead fade-in-up" style="animation-delay: 0.2s;">Enter student information to add to the system</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card fade-in-up" style="animation-delay: 0.3s;">
+                <div class="card-header text-center" style="background: var(--primary-gradient); color: white; border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Student Information
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Create" id="studentForm" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Progress Bar -->
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+
+                        <!-- Name Field -->
+                        <div class="form-step active" id="step1">
+                            <div class="mb-4">
+                                <label asp-for="Name" class="form-label">
+                                    <i class="fas fa-user"></i>Full Name
+                                </label>
+                                <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter student's full name" />
+                                <span asp-validation-for="Name" class="invalid-feedback"></span>
+                            </div>
+                        </div>
+
+                        <!-- Age Field -->
+                        <div class="form-step" id="step2">
+                            <div class="mb-4">
+                                <label asp-for="Age" class="form-label">
+                                    <i class="fas fa-birthday-cake"></i>Age
+                                </label>
+                                <input asp-for="Age" class="form-control form-control-lg" type="number" min="16" max="100" placeholder="Enter age (16-100)" />
+                                <span asp-validation-for="Age" class="invalid-feedback"></span>
+                            </div>
+                        </div>
+
+                        <!-- Course Field -->
+                        <div class="form-step" id="step3">
+                            <div class="mb-4">
+                                <label asp-for="Course" class="form-label">
+                                    <i class="fas fa-book"></i>Course
+                                </label>
+                                <select asp-for="Course" class="form-control form-control-lg">
+                                    <option value="">Select Course</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Electronics Engineering">Electronics Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Business Administration">Business Administration</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                </select>
+                                <span asp-validation-for="Course" class="invalid-feedback"></span>
+                            </div>
+                        </div>
+
+                        <!-- Marks Field -->
+                        <div class="form-step" id="step4">
+                            <div class="mb-4">
+                                <label asp-for="Marks" class="form-label">
+                                    <i class="fas fa-chart-bar"></i>Marks (Percentage)
+                                </label>
+                                <input asp-for="Marks" class="form-control form-control-lg" type="number" min="0" max="100" placeholder="Enter marks (0-100)" />
+                                <span asp-validation-for="Marks" class="invalid-feedback"></span>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle"></i>
+                                        Grade will be calculated: A+ (90+), A (80+), B+ (70+), B (60+), C (50+), F (<50)
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-gradient me-3">
+                                <i class="fas fa-save me-2"></i>Save Student
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary-gradient">
+                                <i class="fas fa-arrow-left me-2"></i>Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--success-gradient); color: white;">
+                <h5 class="modal-title">
+                    <i class="fas fa-check-circle me-2"></i>Success!
+                </h5>
+            </div>
+            <div class="modal-body text-center">
+                <div class="mb-3">
+                    <i class="fas fa-check-circle fa-4x text-success"></i>
+                </div>
+                <h4>Student Added Successfully!</h4>
+                <p class="text-muted">The student record has been created and added to the system.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="@Url.Action("Index")" class="btn btn-gradient">
+                    <i class="fas fa-list me-2"></i>View All Students
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Form animation and validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('studentForm');
+            const steps = document.querySelectorAll('.form-step');
+            const progressBar = document.getElementById('progressBar');
+            let currentStep = 0;
+
+            // Show all steps initially
+            steps.forEach(step => step.classList.add('active'));
+            progressBar.style.width = '100%';
+
+            // Form input animations
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach((input, index) => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+
+                // Add typing animation delay
+                input.addEventListener('input', function() {
+                    clearTimeout(this.typeTimeout);
+                    this.typeTimeout = setTimeout(() => {
+                        validateField(this);
+                    }, 300);
+                });
+            });
+
+            // Real-time validation
+            function validateField(field) {
+                const fieldName = field.name;
+                let isValid = true;
+                let errorMessage = '';
+
+                // Clear previous validation
+                field.classList.remove('is-invalid', 'is-valid');
+
+                switch(fieldName) {
+                    case 'Name':
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            errorMessage = 'Name is required.';
+                        } else if (field.value.trim().length < 2) {
+                            isValid = false;
+                            errorMessage = 'Name must be at least 2 characters long.';
+                        }
+                        break;
+
+                    case 'Age':
+                        const age = parseInt(field.value);
+                        if (!field.value) {
+                            isValid = false;
+                            errorMessage = 'Age is required.';
+                        } else if (age < 16 || age > 100) {
+                            isValid = false;
+                            errorMessage = 'Age must be between 16 and 100.';
+                        }
+                        break;
+
+                    case 'Course':
+                        if (!field.value) {
+                            isValid = false;
+                            errorMessage = 'Please select a course.';
+                        }
+                        break;
+
+                    case 'Marks':
+                        const marks = parseInt(field.value);
+                        if (field.value === '') {
+                            isValid = false;
+                            errorMessage = 'Marks is required.';
+                        } else if (marks < 0 || marks > 100) {
+                            isValid = false;
+                            errorMessage = 'Marks must be between 0 and 100.';
+                        }
+                        break;
+                }
+
+                // Update field appearance
+                if (isValid && field.value) {
+                    field.classList.add('is-valid');
+                } else if (!isValid) {
+                    field.classList.add('is-invalid');
+                }
+
+                // Update error message
+                const feedback = field.parentElement.querySelector('.invalid-feedback');
+                if (feedback) {
+                    feedback.textContent = errorMessage;
+                }
+
+                return isValid;
+            }
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                // Validate all fields
+                let isFormValid = true;
+                inputs.forEach(input => {
+                    if (!validateField(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (!isFormValid) {
+                    e.preventDefault();
+                    // Shake animation for invalid form
+                    form.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        form.style.animation = '';
+                    }, 500);
+                    return;
+                }
+
+                // Show loading overlay
+                document.getElementById('loadingOverlay').style.display = 'flex';
+            });
+
+            // Auto-resize textareas and add character count
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = this.scrollHeight + 'px';
+                });
+            });
+        });
+
+        // Shake animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @@keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Hide loading on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                }
+            }, 500);
+        });
+    </script>
+}

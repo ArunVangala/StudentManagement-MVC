@@ -1,0 +1,203 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\views\\students\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\views\\students\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\views\\students\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\views\\students\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\views\\students\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\views\\students\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\views\\students\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\views\\students\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\views\\students\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\views\\students\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\migrations\\20250917023223_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\migrations\\20250917023223_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\controllers\\studentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|c:\\users\\dell\\onedrive\\desktop\\vanga\\studentmanagement\\studentmanagement\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27FC3E98-23A6-4AED-A85F-426EFA53B8C9}|StudentManagement\\StudentManagement.csproj|solutionrelative:studentmanagement\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:509685457:0:{81164725-9a96-4ece-a4cb-440d8fd285e5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Edit.cshtml",
+              "RelativeDocumentMoniker": "StudentManagement\\Views\\Students\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Edit.cshtml",
+              "RelativeToolTip": "StudentManagement\\Views\\Students\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T02:41:32.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Details.cshtml",
+              "RelativeDocumentMoniker": "StudentManagement\\Views\\Students\\Details.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Details.cshtml",
+              "RelativeToolTip": "StudentManagement\\Views\\Students\\Details.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T02:41:25.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Delete.cshtml",
+              "RelativeDocumentMoniker": "StudentManagement\\Views\\Students\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Delete.cshtml",
+              "RelativeToolTip": "StudentManagement\\Views\\Students\\Delete.cshtml",
+              "ViewState": "AgIAAP4AAAAAAAAAAAAAAAsBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T02:41:18.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Create.cshtml",
+              "RelativeDocumentMoniker": "StudentManagement\\Views\\Students\\Create.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Create.cshtml",
+              "RelativeToolTip": "StudentManagement\\Views\\Students\\Create.cshtml",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAAANkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T02:41:12.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Index.cshtml",
+              "RelativeDocumentMoniker": "StudentManagement\\Views\\Students\\Index.cshtml",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Views\\Students\\Index.cshtml",
+              "RelativeToolTip": "StudentManagement\\Views\\Students\\Index.cshtml",
+              "ViewState": "AgIAALIBAAAAAAAAAAAAwMUBAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T02:39:20.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250917023223_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Migrations\\20250917023223_InitialCreate.cs",
+              "RelativeDocumentMoniker": "StudentManagement\\Migrations\\20250917023223_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Migrations\\20250917023223_InitialCreate.cs",
+              "RelativeToolTip": "StudentManagement\\Migrations\\20250917023223_InitialCreate.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:32:24.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Program.cs",
+              "RelativeDocumentMoniker": "StudentManagement\\Program.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Program.cs",
+              "RelativeToolTip": "StudentManagement\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAUwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:26:57.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentsController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Controllers\\StudentsController.cs",
+              "RelativeDocumentMoniker": "StudentManagement\\Controllers\\StudentsController.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Controllers\\StudentsController.cs",
+              "RelativeToolTip": "StudentManagement\\Controllers\\StudentsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:25:34.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "StudentManagement\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "StudentManagement\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:03:48.802Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "StudentManagement\\Models\\Student.cs",
+              "ToolTip": "C:\\Users\\DELL\\OneDrive\\Desktop\\Vanga\\StudentManagement\\StudentManagement\\Models\\Student.cs",
+              "RelativeToolTip": "StudentManagement\\Models\\Student.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:02:00.702Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 63,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
